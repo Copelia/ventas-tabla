@@ -1,0 +1,44 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="bower_components/my-first-comp/my-first-comp.html">
+
+<dom-module id="ventas-tabla">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <my-first-comp
+    column-list='[{"colName": "Orden", "tipo": "td", "type": "Boolean"},
+    {"colName": "Clienta", "tipo": "td", "type": "Boolean"},
+    {"colName": "Contacto", "tipo": "td", "type": "Boolean"},
+    {"colName": "Productos", "tipo": "td", "type": "Boolean"},
+    {"colName": "Revisado", "tipo": "td", "type": "Boolean"}]'
+    products-list='[{"order": 12, "name": "Alice", "contact": "email", "products": {"list": "uno, dos, tres", "tipo": "textarea"}}, 
+    {"order": 13, "name": "Ale", "contact": "email", "products": {"list": "dos, dos, tres", "tipo": "td"}}]'
+    >
+    </my-first-comp>
+
+  </template>
+
+  <script>
+    /**
+     * `ventas-tabla`
+     * Tabla de control para centro de ventas
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class VentasTabla extends Polymer.Element {
+      static get is() { return 'ventas-tabla'; }
+      static get properties() {
+        return {
+        };
+      }
+    }
+
+    window.customElements.define(VentasTabla.is, VentasTabla);
+  </script>
+</dom-module>
