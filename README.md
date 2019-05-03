@@ -1,6 +1,6 @@
 # \<ventas-tabla\>
 
-Tabla de control para centro de ventas
+Tabla para venta
 
 ## Install the Polymer-CLI
 

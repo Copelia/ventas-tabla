@@ -10,15 +10,14 @@
 
     <link rel="import" href="../ventas-tabla.html">
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
   </head>
   <body>
-    <div class="vertical-section-container centered">
-      <h3>Bienvenida al tablero de ventas</h3>
-          <ventas-tabla></ventas-tabla>
-    </div>
+    <ventas-tabla
+      column-list='[{"colName": "Orden", "tipo": "td", "type": "Boolean"},
+      {"colName": "Nombre", "tipo": "td", "type": "Boolean"}, {"colName": "Contacto", "tipo": "td", "type": "Boolean"}, {"colName": "Productos", "tipo": "td", "type": "Boolean"}, {"colName": "Revisado", "tipo": "td", "type": "Boolean"}]'
+      products-list=
+      '[{"order": 12, "name": "Alice", "contact": "email", "products": {"list": "uno, dos, tres", "tipo": "textarea"}}, {"order": 13, "name": "Ale", "contact": "email", "products": {"list": "dos, dos, tres", "tipo": "td"}}]'
+      week-list='[{"day": "LUN"}, {"day": "MAR"}, {"day": "MIE"}, {"day": "JUE"}, {"day": "VIE"}, {"day": "SAB"}, {"day": "DOM"}]'
+    ></ventas-tabla>
   </body>
 </html>
