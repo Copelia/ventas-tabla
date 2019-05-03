@@ -1,31 +1,112 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="bower_components/my-first-comp/my-first-comp.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../paper-button/paper-button.html">
 
 <dom-module id="ventas-tabla">
   <template>
     <style>
-      :host {
-        display: block;
+
+      table.myTable {
+        text-align: center;
       }
+
+      table.myTable td, table.myTable th {
+        border: 1px solid #1d7e1a;
+        padding: 1em 0.5em;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      table.myTable tbody td {
+        font-size: 1em;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      input{
+        margin-bottom: 0.5em;
+        float: right;
+      }
+
+      paper-checkbox.blue {
+      --paper-checkbox-checked-color: var(--paper-blue-500);
+      --paper-checkbox-unchecked-color: var(--paper-blue-900);
+      --paper-checkbox-label-checked-color: var(--paper-blue-900);
+       }
+
+       paper-button.indigo {
+        background-color: var(--paper-indigo-500);
+        color: white;
+      }
+
+      paper-button.green {
+        background-color: var(--paper-green-500);
+        color: white;
+       }
+
+      .button-container{
+        margin-top: 2em;
+        text-align: center;
+      }
+
+      .week-button{
+        float: left;
+      }
+
+
     </style>
 
-    <my-first-comp
-    column-list='[{"colName": "Orden", "tipo": "td", "type": "Boolean"},
-    {"colName": "Clienta", "tipo": "td", "type": "Boolean"},
-    {"colName": "Contacto", "tipo": "td", "type": "Boolean"},
-    {"colName": "Productos", "tipo": "td", "type": "Boolean"},
-    {"colName": "Revisado", "tipo": "td", "type": "Boolean"}]'
-    products-list='[{"order": 12, "name": "Alice", "contact": "email", "products": {"list": "uno, dos, tres", "tipo": "textarea"}}, 
-    {"order": 13, "name": "Ale", "contact": "email", "products": {"list": "dos, dos, tres", "tipo": "td"}}]'
-    >
-    </my-first-comp>
+    <table class="myTable">
+      <thead>
+        <tr>
+          <template is="dom-repeat" items="{{columnList}}" as="column">     
+            <template is="dom-if" if="{{isType(column.tipo, 'input')}}">
+              <td><input>{{column.colName}}</input></td>
+            </template>
+            <template is="dom-if" if="{{isType(column.tipo, 'td')}}">
+              <td>{{column.colName}}</td>
+            </template>
+            <template is="dom-if" if="{{isType(column.tipo, 'button')}}">
+              <td><button>{{column.colName}}</button></td>
+            </template>
+          </template>
+        </tr>
+      </thead>
+
+      <template is="dom-repeat" items="{{productsList}}" as="product">     
+        <tbody>
+          <tr>    
+            <td>{{product.order}}</td>      
+            <td>{{product.name}}</td>        
+            <td>{{product.contact}}</td>  
+            <template is="dom-if" if="{{isTypeRow(product.products.tipo, 'textarea')}}">      
+              <td><textarea>{{product.products.list}}</textarea></td>    
+            </template>   
+            <template is="dom-if" if="{{isTypeRow(product.products.tipo, 'td')}}">      
+              <td>{{product.products.list}}</td>    
+            </template>   
+            <td> <paper-checkbox on-change="checkChanged"></paper-checkbox></td>
+            <template is="dom-if" if="{{product.week}}">
+              <template is="dom-repeat" items="{{weekList}}" as="week">
+                <td>{{week.day}}<input class="week-button" type="radio"></td>      
+              </template>
+            </template>       
+          </tr>
+        </tbody>
+      </template>
+    </table>
+
+    <div class="button-container">
+      <paper-button raised class="indigo">ENVIAR</paper-button>
+      <paper-button raised class="green">IMPRIMIR</paper-button>
+    </div>
+
 
   </template>
 
   <script>
     /**
      * `ventas-tabla`
-     * Tabla de control para centro de ventas
+     * Tabla para venta
      *
      * @customElement
      * @polymer
@@ -34,9 +115,47 @@
     class VentasTabla extends Polymer.Element {
       static get is() { return 'ventas-tabla'; }
       static get properties() {
-        return {
-        };
-      }
+
+              return {
+          columnList: {
+            type: Array,
+            value: function() {
+              return[
+              {colName: '', tipo:'', type: Boolean},
+              ]
+            }
+          },
+          productsList: {
+              type: Array,
+              value: function() {
+                return[
+                {order: '', name: '', contact: '', products: {list: '', tipo: ''}},
+                ]
+              }
+            },
+          weekList:{
+              type: Array,
+              value: function(){
+                return[
+                  {day: ''}
+                ]
+              }
+            }
+          }
+        }
+
+      //Methods
+       checkChanged(event){
+         console.log("The Check Box was clicked.");        
+          }   
+
+        isType(tipo, valor){ 
+          return (tipo === valor);
+        }
+
+        isTypeRow(tipo, valor){
+          return (tipo === valor);
+        } 
     }
 
     window.customElements.define(VentasTabla.is, VentasTabla);

@@ -1,10 +1,11 @@
 {
   "name": "ventas-tabla",
-  "description": "Tabla de control para centro de ventas",
+  "description": "Tabla para venta",
   "main": "ventas-tabla.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "my-first-comp": "https://github.com/Copelia/table-playground.git#v0.0.3"
+    "paper-checkbox": "@polymer/paper-checkbox#2.0-preview",
+    "paper-button": "@polymer/paper-button#2.0-preview"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
